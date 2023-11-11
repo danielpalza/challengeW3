@@ -1,7 +1,19 @@
 import { Model, DataTypes } from "sequelize";
+import { Op } from "sequelize";
 import sequelize from "../config/db";
 
-class Country extends Model {}
+export class Country extends Model {
+  static findByName(name: string) {
+    return this.findAll({
+      where: {
+        name: {
+          [Op.iLike]: `%${name}%`,
+        },
+      },
+      limit: 5,
+    });
+  }
+}
 
 Country.init(
   {
@@ -18,8 +30,7 @@ Country.init(
   },
   {
     sequelize,
-    modelName: "Country",
+    modelName: "Countries",
   }
 );
 
-module.exports = Country;
