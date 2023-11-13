@@ -8,7 +8,10 @@ export class CountryController {
 
   static getCountrys = async (req: Request, res: Response, next: Function) => {
     try {
-      Validation.validateName(req.query.name);
+      if(!(Validation.validateName(req.query.name))) {
+        res.status(204).end();
+        return;
+      }
 
       let query = await Country.findByName(req.query.name);
       let totalPopulation = 0;

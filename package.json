@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node index.ts",
     "dev": "nodemon index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./test/*.spec.ts"
   },
   "author": "Daniel Palza",
   "license": "ISC",
@@ -21,8 +21,13 @@
     "typeorm": "^0.3.17"
   },
   "devDependencies": {
+    "@types/mocha": "^10.0.4",
     "@types/node": "^20.9.0",
+    "chai": "^4.3.10",
+    "chai-http": "^4.4.0",
+    "mocha": "^10.2.0",
     "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }
 }
