@@ -12,11 +12,10 @@ export class CountryController {
         res.status(204).end();
         return;
       }
-
       let query = await Country.findByName(req.query.name);
-      let totalPopulation = 0;
+      let totalPopulation:number = 0;
       let countryData = query.map((country) => {
-        totalPopulation+= country.dataValues.population
+        totalPopulation+= parseInt(country.dataValues.population)
         return {
           name: country.dataValues.name,
           population: country.dataValues.population,

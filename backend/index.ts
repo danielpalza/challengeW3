@@ -1,8 +1,14 @@
 import express, { NextFunction } from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
+
+const PORT= process.env.PORT || 4000
 
 dotenv.config();
 const app = express();
+
+// Configuración básica de CORS
+app.use(cors());
 
 app.use('/api/country', require('./routes/country.routes'));
 
@@ -24,8 +30,8 @@ app.use(function (err: Error, req: any, res: any, next: NextFunction) {
     res.status(500).json();
   });
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 })
 
 
