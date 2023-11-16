@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React from "react";
 import { useState } from "react";
 import { NumericFormat } from "react-number-format";
 import CountryService from "./services/country.service";
@@ -11,12 +11,27 @@ export default function Home() {
     Array<{ name: string; population: number }>
   >([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [msg, setMsg] = useState("");
 
   const handleSearch = async () => {
+    if (inputValue.length < 3) {
+      setError("Ingresa al menos 3 caracteres");
+      setTimeout(() => {
+        setError("");
+      }, 2000);
+      return;
+    }
     setLoading(true);
     setCountries([]);
     setTotalPopulation(0);
     const data = await CountryService.getCountries(inputValue);
+    if (data.countries.length === 0) {
+      setMsg("No se encontraron resultados");
+      setTimeout(() => {
+        setMsg("");
+      }, 2000);
+    }
     setCountries(data.countries);
     setTotalPopulation(data.totalPopulation);
     setLoading(false);
@@ -40,10 +55,10 @@ export default function Home() {
         </button>
       </div>
       <div className="w-full max-w-2xl">
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          {loading ? (
-            <div className="loader">Cargando...</div>
-          ) : countries?.length > 0 ? (
+        {loading ? (
+          <div className="loader">Cargando...</div>
+        ) : countries?.length > 0 ? (
+          <div className="bg-white p-6 rounded-lg shadow-lg">
             <table className="w-full">
               <thead>
                 <tr>
@@ -68,21 +83,28 @@ export default function Home() {
                 ))}
               </tbody>
             </table>
-          ) : (
-            <p>No se encontraron resultados</p>
-          )}
-          <div className="mt-4">
-            {countries?.length > 0 ? <p>
-              Población total:{" "}
-              <NumericFormat
-                value={totalPopulation}
-                allowLeadingZeros
-                thousandSeparator=","
-              />
-            </p>: null}
-           
+            <div className="mt-4">
+              {countries?.length > 0 ? (
+                <p>
+                  Población total:{" "}
+                  <NumericFormat
+                    value={totalPopulation}
+                    allowLeadingZeros
+                    thousandSeparator=","
+                  />
+                </p>
+              ) : null}
+            </div>
           </div>
-        </div>
+        ) : error.length > 0 ? (
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <p className="text-red-500">{error}</p>
+          </div>
+        ) : msg.length > 0 ? (
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <p>{msg}</p>
+          </div>
+        ) : null}
       </div>
     </div>
   );
