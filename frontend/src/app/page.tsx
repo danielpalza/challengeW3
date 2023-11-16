@@ -14,6 +14,8 @@ export default function Home() {
 
   const handleSearch = async () => {
     setLoading(true);
+    setCountries([]);
+    setTotalPopulation(0);
     const data = await CountryService.getCountries(inputValue);
     setCountries(data.countries);
     setTotalPopulation(data.totalPopulation);
