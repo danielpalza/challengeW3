@@ -1,10 +1,16 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "sourceMap": true,
-      "outDir": "dist",
-      "lib": ["ES2015"],
-      "esModuleInterop": true,
-    }
+  "include": ["backend"],
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "sourceMap": true,
+    "lib": ["ES2015"],
+    "esModuleInterop": true,
+    "outDir": "bin",                       
+    "rootDir": "./",                       
+    "removeComments": true,                
+    "strict": true,     
+    "moduleResolution": "node",         
+    "baseUrl": "./",   
   }
+}
