@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node ./backend/index.ts",
     "dev": "nodemon ./backend/index.ts",
-    "test": "mocha ./backend/test/*.spec.ts"
+    "test": "mocha --require ts-node/register ./backend/test/*.spec.ts"
   },
   "author": "Daniel Palza",
   "license": "ISC",

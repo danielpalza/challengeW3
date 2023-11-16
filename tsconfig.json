@@ -1,5 +1,8 @@
 {
   "include": ["backend"],
+  "exclude": [
+    "node_modules"
+  ],
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
@@ -12,5 +15,6 @@
     "strict": true,     
     "moduleResolution": "node",         
     "baseUrl": "./",   
-  }
+  },
+  
 }

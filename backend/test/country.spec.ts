@@ -46,7 +46,7 @@ describe('API Tests', function() {
       .end(function(err, res){
         let totalPopulation = 0;
         for (let country of res.body.countries) {
-          totalPopulation += country.population;
+          totalPopulation +=parseInt( country.population);
         }
         expect(res.body.totalPopulation).to.equal(totalPopulation);
         done();
